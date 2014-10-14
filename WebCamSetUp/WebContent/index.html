@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>WebCam Set Up</title>
+</head>
+<body>
+<video id="v" autoplay></video>
+
+<script>
+alert('called1');
+window.addEventListener('DOMContentLoaded', function() {
+    alert('called2');
+	   var v = document.getElementById('v');
+	   navigator.getUserMedia = (navigator.getUserMedia ||
+	                             navigator.webkitGetUserMedia ||
+	                             navigator.mozGetUserMedia ||
+	                             navigator.msGetUserMedia);
+	   if (navigator.getUserMedia) {
+	      // Request access to video only
+	      alert('called3');
+	      navigator.getUserMedia(
+	         {
+	            video:true,
+	            audio:false
+	         },        
+	         function(stream) {
+	        	 alert('url sending');
+	            var url = window.URL || window.webkitURL;
+	            alert('object creating');
+	            v.src = url ? url.createObjectURL(stream) : stream;
+	            alert('playing');
+	            v.play();
+	            alert("end");
+	         },
+	         function(error) {
+	            alert('Something went wrong. (error code ' + error.code + ')');
+	            return;
+	         }
+	      );
+	   }
+	   else {
+	      alert('Sorry, the browser you are using doesn\'t support getUserMedia');
+	      return;
+	   }
+	});
+</script>
+
+</body>
+</html>
