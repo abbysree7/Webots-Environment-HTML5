@@ -3,6 +3,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>WebCam Set Up</title>
+<!--<link href="http://vjs.zencdn.net/4.10/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/4.10/video.js"></script>
+<style type="text/css">
+  .vjs-default-skin { color: #e3c725; }
+  .vjs-default-skin .vjs-play-progress,
+  .vjs-default-skin .vjs-volume-level { background-color: #bed95a }
+  .vjs-default-skin .vjs-control-bar,
+  .vjs-default-skin .vjs-big-play-button { background: rgba(174,4,4,0.7) }
+  .vjs-default-skin .vjs-slider { background: rgba(174,4,4,0.2333333333333333) }
+  .vjs-default-skin .vjs-control-bar { font-size: 60% }
+</style>-->
 </head>
 <body>
 <table>
@@ -13,6 +24,17 @@
 </td>
 <td>
 	Robot video goes here
+	<video autoplay>
+		<source src="videos/Robot.mp4" type="video/mp4">
+		Problem
+	</video>
+	
+<!--<video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls
+ preload="auto" width="640" height="264" 
+ data-setup="{}">
+ <source src="videos/Robot.mp4" type="video/mp4">
+ <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+</video>-->
 </td>
 </tr>
 <tr>
@@ -23,9 +45,7 @@
 </td>
 </tr></table>
 <script>
-alert('called1');
 window.addEventListener('DOMContentLoaded', function() {
-    alert('called2');
 	   var v = document.getElementById('v');
 	   navigator.getUserMedia = (navigator.getUserMedia ||
 	                             navigator.webkitGetUserMedia ||
@@ -33,20 +53,15 @@ window.addEventListener('DOMContentLoaded', function() {
 	                             navigator.msGetUserMedia);
 	   if (navigator.getUserMedia) {
 	      // Request access to video only
-	      alert('called3'+navigator.getUserMedia);
 	      navigator.getUserMedia(
 	         {
 	            video:true,
 	            audio:true
 	         },        
 	         function(localMediaStream) {
-	        	 alert('url sending');
 	            var url = window.URL || window.webkitURL;
-	            alert('object creating');
 	            v.src = url ? url.createObjectURL(localMediaStream) : localMediaStream;
-	            alert('playing');
 	            v.play();
-	            alert("end");
 	         },
 	         function(error) {
 	            alert('Something went wrong. (error code ' + error.code + ')');
