@@ -5,8 +5,23 @@
 <title>WebCam Set Up</title>
 </head>
 <body>
+<table>
+<tr><td rowspan="2">
+<canvas height=500 width=500>
+
+</canvas>
+</td>
+<td>
+	Robot video goes here
+</td>
+</tr>
+<tr>
+<td valign="center">
+
 <video id="v" autoplay></video>
 
+</td>
+</tr></table>
 <script>
 alert('called1');
 window.addEventListener('DOMContentLoaded', function() {
@@ -18,17 +33,17 @@ window.addEventListener('DOMContentLoaded', function() {
 	                             navigator.msGetUserMedia);
 	   if (navigator.getUserMedia) {
 	      // Request access to video only
-	      alert('called3');
+	      alert('called3'+navigator.getUserMedia);
 	      navigator.getUserMedia(
 	         {
 	            video:true,
-	            audio:false
+	            audio:true
 	         },        
-	         function(stream) {
+	         function(localMediaStream) {
 	        	 alert('url sending');
 	            var url = window.URL || window.webkitURL;
 	            alert('object creating');
-	            v.src = url ? url.createObjectURL(stream) : stream;
+	            v.src = url ? url.createObjectURL(localMediaStream) : localMediaStream;
 	            alert('playing');
 	            v.play();
 	            alert("end");
